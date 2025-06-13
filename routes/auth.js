@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const db = require('../db'); // Tambahkan koneksi ke database
 
 // Halaman Login (tanpa layout)
 router.get('/login', (req, res) => {
@@ -27,11 +28,13 @@ function isAuthenticated(req, res, next) {
   }
 }
 
-// Import data pembelian
-const { pembelianList } = require('./pembelian');
-
+// Route Dashboard - Ambil data pembelian dari database
 router.get('/dashboard', isAuthenticated, (req, res) => {
-  res.render('dashboard', { layout: 'layout', pembelianList });
+  const sql = 'SELECT * FROM pembelian ORDER BY created_at DESC';
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.render('dashboard', { layout: 'layout', pembelianList: results });
+  });
 });
 
 // Logout

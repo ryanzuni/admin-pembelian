@@ -4,15 +4,31 @@
   <meta charset="UTF-8">
   <title>Form Pembelian</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background-color: #f4f6f8;
-      margin: 0;
-      padding: 0;
       display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
+    }
+
+    /* Contoh sidebar - kamu bisa sesuaikan dengan sidebar kamu */
+    .sidebar {
+      width: 250px;
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+    }
+
+    /* Konten utama (form) */
+    .main-content {
+      flex-grow: 1;
+      padding: 40px;
+      overflow-y: auto;
     }
 
     .form-container {
@@ -20,8 +36,7 @@
       padding: 30px 40px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 400px;
+      max-width: 500px;
     }
 
     h1 {
@@ -65,17 +80,21 @@
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h1>Form Pembelian</h1>
-    <form action="/pembelian" method="POST">
-      <label for="produk">Nama Produk:</label>
-      <input type="text" id="produk" name="produk" required>
 
-      <label for="jumlah">Jumlah:</label>
-      <input type="number" id="jumlah" name="jumlah" required>
+  <!-- Konten utama -->
+  <div class="main-content">
+    <div class="form-container">
+      <h1>Form Pembelian</h1>
+      <form action="/pembelian" method="POST">
+        <label for="produk">Nama Produk:</label>
+        <input type="text" id="produk" name="produk" required>
 
-      <button type="submit">Simpan</button>
-    </form>
+        <label for="jumlah">Jumlah:</label>
+        <input type="number" id="jumlah" name="jumlah" required>
+
+        <button type="submit">Simpan</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>

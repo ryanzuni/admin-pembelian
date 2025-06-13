@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-let pembelianList = []; // Simpan data sementara
+const db = require('../db'); // import koneksi database
 
 router.get('/', (req, res) => {
   res.render('form-pembelian', { layout: 'layout' });
@@ -9,18 +8,23 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const { produk, jumlah } = req.body;
-  pembelianList.push({ id: Date.now(), produk, jumlah });
-  res.redirect('/dashboard');
+
+  const sql = 'INSERT INTO pembelian (produk, jumlah) VALUES (?, ?)';
+  db.query(sql, [produk, jumlah], (err, result) => {
+    if (err) throw err;
+    res.redirect('/dashboard');
+  });
 });
 
 router.post('/delete/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  pembelianList = pembelianList.filter(item => item.id !== id);
-  res.redirect('/dashboard');
+  const sql = 'DELETE FROM pembelian WHERE id = ?';
+  db.query(sql, [id], (err, result) => {
+    if (err) throw err;
+    res.redirect('/dashboard');
+  });
 });
 
-// Ekspor router dan data pembelian
 module.exports = {
-  router,
-  pembelianList,
+  router
 };
