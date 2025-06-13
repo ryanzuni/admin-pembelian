@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    p {
+      text-align: center;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    .nav-links {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .nav-links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: white;
+      background-color: #3498db;
+      padding: 10px 20px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: #2980b9;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #3498db;
+      color: white;
+    }
+
+    th, td {
+      padding: 14px 20px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    form {
+      margin: 0;
+    }
+
+    button {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat datang di Dashboard Admin</h1>
+    <p>Ini adalah halaman utama setelah login.</p>
+
+    <div class="nav-links">
+      <a href="/pembelian">➕ Tambah Pembelian</a>
+      <a href="/chat">💬 Chat</a>
+    </div>
+
+    <h2>Daftar Pembelian</h2>
+
+    <% if (pembelianList.length === 0) { %>
+      <p>Tidak ada data pembelian.</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Produk</th>
+            <th>Jumlah</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% pembelianList.forEach((item, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= item.produk %></td>
+              <td><%= item.jumlah %></td>
+              <td>
+                <form action="/pembelian/delete/<%= item.id %>" method="POST" onsubmit="return confirm('Yakin hapus data ini?')">
+                  <button type="submit">❌ Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+</body>
+</html>

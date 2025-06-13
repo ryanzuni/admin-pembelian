@@ -1,0 +1,129 @@
+<div class="chat-wrapper">
+  <h2>Chat Admin</h2>
+  <div class="chat-box" id="chatBox">
+    <div class="message user">Halo, saya butuh bantuan.</div>
+    <div class="message admin">Baik, ada yang bisa kami bantu?</div>
+  </div>
+
+  <form class="chat-form" onsubmit="sendMessage(event)">
+    <input type="text" id="inputMessage" placeholder="Ketik pesan..." required />
+    <button type="submit">Kirim</button>
+  </form>
+
+  <div class="back-link">
+    <p><a href="/dashboard">← Kembali ke Dashboard</a></p>
+  </div>
+</div>
+
+<style>
+  .chat-wrapper {
+    max-width: 700px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+
+  .chat-box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+  }
+
+  .message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    max-width: 80%;
+    display: inline-block;
+    clear: both;
+  }
+
+  .message.user {
+    background: #d1f7d6;
+    float: left;
+  }
+
+  .message.admin {
+    background: #cce5ff;
+    float: right;
+  }
+
+  .chat-form {
+    display: flex;
+  }
+
+  .chat-form input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px 0 0 6px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+
+  .chat-form button {
+    padding: 10px 20px;
+    border: none;
+    background: #3498db;
+    color: white;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+  }
+
+  .chat-form button:hover {
+    background: #2980b9;
+  }
+
+  .back-link {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .back-link a {
+    text-decoration: none;
+    color: #555;
+  }
+
+  .back-link a:hover {
+    color: #2980b9;
+  }
+</style>
+
+<script>
+  function sendMessage(e) {
+    e.preventDefault();
+    const input = document.getElementById('inputMessage');
+    const message = input.value;
+    const chatBox = document.getElementById('chatBox');
+
+    if (message.trim() !== '') {
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message user';
+      userMsg.textContent = message;
+      chatBox.appendChild(userMsg);
+
+      // Dummy admin reply
+      const adminMsg = document.createElement('div');
+      adminMsg.className = 'message admin';
+      adminMsg.textContent = 'Pesan diterima. Mohon tunggu balasan.';
+      setTimeout(() => {
+        chatBox.appendChild(adminMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 800);
+    }
+
+    input.value = '';
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+</script>

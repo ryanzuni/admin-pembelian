@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Page</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #dee2e6;
+      text-align: left;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    .logout-btn {
+      float: right;
+      padding: 8px 12px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Halaman Admin</h1>
+  <a class="logout-btn" href="/logout">Logout</a>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Nama</th><th>Produk</th></tr>
+    </thead>
+    <tbody>
+      <% pembelian.forEach(item => { %>
+        <tr>
+          <td><%= item.id %></td>
+          <td><%= item.nama %></td>
+          <td><%= item.produk %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>
